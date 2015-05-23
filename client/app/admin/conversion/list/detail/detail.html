@@ -1,0 +1,58 @@
+<md-toolbar class="md-hue-1 md-tall" id="conversion-detail-toolbar">
+
+	<span layout="row" layout-align="space-between" class="md-toolbar-tools md-toolbar-tools-top">
+		<md-button ng-click="detail.goBack()" aria-label="Close detail view">
+			<md-icon md-svg-icon="navigation:ic_close_24px"></md-icon>
+		</md-button>
+		<md-button ng-show="!detail.isRoot || detail.currentIsRoot" ng-click="detail.edit()" aria-label="Edit conversion">
+			<md-icon md-svg-icon="content:ic_create_24px"></md-icon>
+		</md-button>
+	</span>
+
+	<span class="md-toolbar-tools md-toolbar-tools-bottom" layout="column">
+		<h3>{{::detail.conversion.name}}</h3>
+	</span>
+
+</md-toolbar>
+
+<md-content class="md-padding" flex id="conversion-detail-content">
+
+	<section class="section" layout="column">
+
+		<span class="section-title">Conversion data</span>
+
+		<span layout="row" layout-sm="column" class="detail-info">
+			<span flex="45">Conversionname</span>
+			<span flex>{{::detail.conversion.name}}</span>
+		</span>
+
+		<span ng-if="detail.conversion.info" layout="row" layout-sm="column" class="detail-info">
+			<span flex="45">Info</span>
+			<span flex>{{::detail.conversion.info}}</span>
+		</span>
+
+	</section>
+
+	<section class="section" layout="column" ng-hide="detail.isRoot">
+
+		<span class="section-title">Record Information</span>
+
+		<span layout="row" layout-sm="column" class="detail-info">
+			<span flex="45">Modified</span>
+			<span flex ng-show="detail.conversion.modified" class="subtitle">
+				<span am-time-ago="detail.conversion.modified"></span>
+				<md-tooltip>{{detail.conversion.modified | date:'dd. MMMM yyyy H:mm'}}</md-tooltip>
+				{{detail.conversion.modifiedBy && 'by ' + detail.conversion.modifiedBy}}
+			</span>
+		</span>
+
+		<span layout="row" layout-sm="column" class="detail-info">
+			<span flex="45">Created</span>
+			<span flex ng-show="detail.conversion.created" class="subtitle">{{detail.conversion.created | date:'dd. MMMM yyyy H:mm'}}</span>
+		</span>
+
+	</section>
+
+</md-content>
+
+
